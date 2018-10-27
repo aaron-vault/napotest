@@ -11,6 +11,33 @@
 |
 */
 
+/**
+ * Guest
+ */
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/about', function(){
+    return view('about');
+});
+
+Route::get('/posts', 'PostController@index')->name('posts');
+
+Route::post('/posts/add', 'PostController@store')->name('postAdd');
+
+Route::get('/posts/{post}', 'PostController@show')->name('postShow');
+
+Route::patch('/posts/{post}/edit', 'PostController@show')->name('postEdit');
+
+/**
+ * User
+ */
+
+
+
+/**
+ * Admin
+ */
+
