@@ -27,14 +27,14 @@
             @foreach($posts as $post)
                 <div class="col-sm-3">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ asset($post->image) }}">
+                        <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ str_limit($post->description, 50, '...') }}</p>
                         </div>
                         <div class="card-body">
                             <a href="{{ url('/posts', $post->id) }}" class="card-link">Читать</a>
-                            <a href="#" class="card-link">Редактировать</a>
+                            <a href="{{ route('postEdit', $post->id) }}" class="card-link">Редактировать</a>
                         </div>
                     </div>
                 </div>

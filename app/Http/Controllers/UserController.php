@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\UserContract;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Compound;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->model->all();
-        return view('users', compact('users'));
+        return view('user.all', compact('users'));
     }
 
     /**
@@ -43,7 +44,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->model->create($request);
+        return redirect()->back();
     }
 
     /**
@@ -65,7 +67,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->model->getUser($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -77,7 +80,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->model->update($request, $id);
+        return redirect('/users');
     }
 
     /**

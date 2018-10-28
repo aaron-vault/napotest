@@ -11,5 +11,5 @@ namespace App\Contracts;
 
 interface PostContract extends CrudContract
 {
-    public function show($id);
+    public function getPost($id);
 }

@@ -25,12 +25,21 @@ Route::get('/about', function(){
 
 Route::get('/posts', 'PostController@index')->name('posts');
 
+Route::get('/users', 'UserController@index')->name('users');
+
 Route::post('/posts/add', 'PostController@store')->name('postAdd');
+
+Route::post('/users/add', 'UserController@store')->name('userAdd');
 
 Route::get('/posts/{post}', 'PostController@show')->name('postShow');
 
-Route::patch('/posts/{post}/edit', 'PostController@show')->name('postEdit');
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('postEdit');
 
+Route::get('/users/{user}/edit', 'UserController@edit')->name('userEdit');
+
+Route::patch('/users/{user}', 'UserController@update')->name('userUpdate');
+
+Route::patch('/posts/{post}', 'PostController@update')->name('postUpdate');
 /**
  * User
  */
@@ -41,3 +50,7 @@ Route::patch('/posts/{post}/edit', 'PostController@show')->name('postEdit');
  * Admin
  */
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

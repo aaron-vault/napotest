@@ -11,5 +11,5 @@ namespace App\Contracts;
 
 interface UserContract extends CrudContract
 {
-
+    public function getUser($id);
 }

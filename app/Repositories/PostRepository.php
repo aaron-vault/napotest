@@ -6,6 +6,7 @@ namespace App\Repositories;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Contracts\PostContract;
+use Illuminate\Support\Facades\Storage;
 
 class PostRepository implements PostContract
 {
@@ -23,12 +24,13 @@ class PostRepository implements PostContract
 
         if ($data->hasFile('image'))
         {
-            $image = $data->file('image')->store('img');
+            $image = $data->file('image');
+            $pathSaveImage = Storage::putFile('img', $image);
 
             $post = [
                 'title' => $title,
                 'description' => $description,
-                'image' => $image
+                'image' => $pathSaveImage
             ];
             return $this->model->create($post);
         }
@@ -51,7 +53,23 @@ class PostRepository implements PostContract
     public function update(Request $data, $id)
     {
         $record = $this->model->find($id);
-        return $record->update($data);
+
+        $post = [];
+        $title = $data->input('title');
+        $post['title'] = $title;
+
+        $description = $data->input('description');
+        $post['description'] = $description;
+
+        $image = $data->file('image');
+
+        if(!empty($image))
+        {
+            $pathSaveImage = Storage::putFile('img', $image);
+            $post['image'] = $image->getFilename();
+        }
+
+        return $record->update($post);
     }
 
     public function delete($id)
@@ -59,7 +77,7 @@ class PostRepository implements PostContract
         return $this->model->destroy($id);
     }
 
-    public function show($id)
+    public function getPost($id)
     {
         return $this->model->findOrFail($id);
     }

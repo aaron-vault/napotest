@@ -55,8 +55,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = $this->model->show($id);
-        return view('show', compact('post'));
+        $post = $this->model->getPost($id);
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -67,7 +67,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this->model->getPost($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -79,7 +80,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->model->update($request, $id);
+        return redirect('/posts');
     }
 
     /**
