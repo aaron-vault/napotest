@@ -19,7 +19,7 @@ class UserRepository implements UserContract
     public function create(Request $data)
     {
         $email = $data->input('email');
-        $password = Hash::make($data->input('password'));
+        $password = bcrypt($data->input('password'));
         $role = $data->input('role');
 
         $user = [
@@ -45,8 +45,9 @@ class UserRepository implements UserContract
         $user['email'] = $email;
 
         $password = $data->input('password');
+
         if(!empty($password))
-            $user['password'] = $password;
+            $user['password'] = bcrypt($password);
 
         $role = $data->input('role');
         $user['role'] = $role;

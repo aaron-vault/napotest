@@ -29,11 +29,6 @@
                         <option selected>User</option>
                         <option>Guest</option>
                     @endif
-                    @if($user->role == "Guest")
-                        <option>Admin</option>
-                        <option>User</option>
-                        <option selected>Guest</option>
-                    @endif
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>

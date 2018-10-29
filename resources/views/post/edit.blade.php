@@ -19,7 +19,7 @@
                 </textarea>
             </div>
             <div class="form-group">
-                <img src="{{ asset('storage/' . $post->image) }}" class="rounded float-left" width="200">
+                <img src="{{ asset('img/' . $post->image) }}" class="rounded float-left" width="200">
                 <small class="form-text text-muted">Текущее изображение статьи</small>
                 <input type="file" name="image" id="postImageEdit" class="form-control">
                 <small class="form-text text-muted">Загрузите новое изображение статьи</small>

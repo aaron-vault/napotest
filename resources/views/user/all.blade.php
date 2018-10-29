@@ -18,7 +18,6 @@
                     <select name="role" id="role" class="form-control">
                         <option selected>Admin</option>
                         <option>User</option>
-                        <option>Guest</option>
                     </select>
                 </div>
                 <div class="col-auto my-1">

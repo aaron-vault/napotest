@@ -22,27 +22,17 @@ class PostRepository implements PostContract
         $title = $data->input('title');
         $description = $data->input('description');
 
-        if ($data->hasFile('image'))
-        {
-            $image = $data->file('image');
-            $pathSaveImage = Storage::putFile('img', $image);
+        $image = $data->file('image');
+        $imageFileName = $image->getClientOriginalName();
+        $image->move(public_path() . '/img',$imageFileName);
 
-            $post = [
-                'title' => $title,
-                'description' => $description,
-                'image' => $pathSaveImage
-            ];
-            return $this->model->create($post);
-        }
-        else
-        {
-            $post = [
-                'title' => $title,
-                'description' => $description,
-                'image' => 'img/not-found.jpg'
-            ];
-            return $this->model->create($post);
-        }
+        $post = [
+            'title' => $title,
+            'description' => $description,
+            'image' => $imageFileName
+        ];
+        return $this->model->create($post);
+
     }
 
     public function all()
@@ -65,8 +55,9 @@ class PostRepository implements PostContract
 
         if(!empty($image))
         {
-            $pathSaveImage = Storage::putFile('img', $image);
-            $post['image'] = $image->getFilename();
+            $imageFileName = $image->getClientOriginalName();
+            $image->move(public_path() . '/img',$imageFileName);
+            $post['image'] = $imageFileName;
         }
 
         return $record->update($post);
